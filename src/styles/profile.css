@@ -1,0 +1,94 @@
+.deleteEditButtonSection {
+  display: flex;
+  height: 40px;
+  /* margin-left: -100px; */
+}
+
+.deleteButton, .editButton {
+  display: flex;
+  align-items: center;
+  margin-left: 18px;
+  border: none;
+  background-color: transparent;  
+  cursor: pointer;
+}
+
+.deleteEditButtonSection p {
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.deleteButton>p {
+  color: var(--soft-red);
+}
+
+.editButton>p {
+  color: var(--moderate-blue);
+}
+
+.deleteButton:hover>p, .deleteButton:active>p,
+.editButton:hover>p, .editButton:active>p {
+  filter: opacity(30%);
+}
+
+.deleteButton:hover>img, .deleteButton:active>img,
+.editButton:hover>img, .editButton:active>img {
+  filter: opacity(30%);
+}
+
+.typeSection, .replySection {
+  width: 100%;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 5% 80% 10%;
+  column-gap: 20px;
+}
+
+.replyOfReplySection {
+  width: 86%;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 5% 78% 10%;
+  column-gap: 20px;
+  margin-bottom: 20px;
+}
+
+.replySection {
+  margin-bottom: 20px;
+}
+
+.typeSection>img, .replySection>img, .replyOfReplySection>img {
+  height: 40px;
+  width: 40px;
+}
+
+textarea {
+  padding: 10px 20px;
+  border: 1px solid hsl(223, 19%, 93%);
+  border-radius: 6px;
+  outline: none;
+}
+
+textarea:focus {
+  border: 1px solid hsl(211, 10%, 45%);
+}
+
+.submitB, .replyB {
+  height: 36px;
+  width: 80px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--moderate-blue);
+  color: white;
+  cursor: pointer;
+}
+
+.submitB:hover, .submitB:active,
+.replyB:hover, .replyB:active {
+  background-color: hsla(238, 40%, 52%, 0.386);
+  transition: 0.2s;
+}
