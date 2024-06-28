@@ -1,6 +1,6 @@
 import {useEffect, useReducer} from 'react'
 import data from '../data/data.json'
-import Comments from './components/Comments'
+import Comments from './components/comments/Comments'
 import TypeSection from './components/TypeSection'
 import Modal from './components/Modal'
 
@@ -42,7 +42,7 @@ const reducer = (state, action) => {
 
 const App = () => {
 const [state, dispatch] = useReducer(reducer, 
-{   currentUser: {}, 
+{   currentUser: data.currentUser, 
     currentComments: [], 
     textArea: "", 
     checker: false,
@@ -80,9 +80,7 @@ const submitComment = (e) => {
   }
 
 
-  let localData = localStorage.getItem('data')
-
-    localData = JSON.parse(localData)
+  let localData = JSON.parse(localStorage.getItem('data'))
     localData.comments.push(newPost)  
     localStorage.setItem('data', JSON.stringify(localData))
   
@@ -121,10 +119,7 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  dispatch({type: 'setCurrentUser', setCurrentUser: data.currentUser})
-  let localData = localStorage.getItem('data')
-
-    localData = JSON.parse(localData)
+  let localData = JSON.parse(localStorage.getItem('data'))
    
     dispatch({type: 'setCurrentComments', setCurrentComments: localData.comments})
 
@@ -140,12 +135,7 @@ useEffect(() => {
       <Modal 
         state={state}
         dispatch={dispatch}
-      /> : ""}
-
-    <button onClick={() => localStorage.removeItem('data')}>Delete</button>
-   
- 
-     
+      /> : ""}   
   
    </form >
   
