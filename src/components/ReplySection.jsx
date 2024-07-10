@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ReplySection = ({state, dispatch, comment, reply}) => {
+const ReplySection = ({state, dispatch, comment, reply, localData}) => {
 
   const createReply = () => {
     let id = Math.random()
-  let idCheck = state.currentComments.map(comment => comment.id === id ? false : true)
+  let idCheck = localData.comments.map(comment => comment.id === id ? false : true)
   if(idCheck === false) id++
 
   let theCommentOfReply = comment.user.username
@@ -27,13 +27,9 @@ const ReplySection = ({state, dispatch, comment, reply}) => {
     username: state.currentUser.username
     }
   }
-
-    let data = JSON.parse(localStorage.getItem('data'))
-    let index = state.currentComments.indexOf(comment)
-    data.comments[index].replies.push(newReply) 
- 
- 
-    localStorage.setItem('data', JSON.stringify(data))
+   
+    comment.replies.push(newReply)
+    localStorage.setItem('data', JSON.stringify(localData))
     dispatch({type: 'replyId', setReplyId: -3})
     dispatch({type: 'setChecker'})
   }

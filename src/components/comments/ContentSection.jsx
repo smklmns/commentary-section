@@ -1,19 +1,17 @@
 import React from 'react'
 import dateFunc from '../../dateFunc'
 
-const ContentSection = ({comment, state, dispatch}) => {
+const ContentSection = ({comment, state, dispatch, localData}) => {
 
   const editFunc = (comment ) => {
     if(state.editedComment){ 
-    let index = state.currentComments.indexOf(comment)
-    let data = JSON.parse(localStorage.getItem('data'))
-    data.comments[index].content = state.editedComment
-    localStorage.setItem('data', JSON.stringify(data))
-   
-    dispatch({type: 'setId', setId: -10}) 
+    comment.content = state.editedComment
+      
+    localStorage.setItem('data', JSON.stringify(localData))
+    dispatch({type: 'setEditId', setEditId: -10}) 
     dispatch({type: 'setChecker'})
     } else {
-      dispatch({type: 'setId', setId: -10})
+      dispatch({type: 'setEditId', setEditId: -10}) 
     }
   }
   return (
@@ -33,7 +31,7 @@ const ContentSection = ({comment, state, dispatch}) => {
            </div>
              
 
-             {  comment.id === state.id ? <div className="editCommentSection"><textarea id="editArea" rows="4" onChange={(e) => {dispatch({type: 'setEditedComment', setEditedComment: e.target.value})}} defaultValue={comment.content}></textarea>
+             {  comment.id === state.editId ? <div className="editCommentSection"><textarea id="editArea" rows="4" onChange={(e) => {dispatch({type: 'setEditedComment', setEditedComment: e.target.value})}} defaultValue={comment.content}></textarea>
              <button className='updateB' type='button' onClick={() => editFunc(comment)}>UPDATE</button>
              
              </div>

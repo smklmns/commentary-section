@@ -1,71 +1,15 @@
 import React from 'react'
+import {upvoteFunction, downvoteFunction} from '../UpvoteDownvoteLogic'
 
-const ScoreSection = ({state, dispatch, comment, reply}) => {
-
-  const upvoteScore = (reply) => {
-    let user = state.currentUser.username
- 
-   if(!reply.liked) {
-     let liked = {}
-     liked[user] = 1
-
-
-     let commentIndex = state.currentComments.indexOf(comment)
-     let replyIndex = comment.replies.indexOf(reply)
-     let data = JSON.parse(localStorage.getItem('data'))
-     data.comments[commentIndex].replies[replyIndex].score++
-
-     data.comments[commentIndex].replies[replyIndex].liked = liked
-     localStorage.setItem('data', JSON.stringify(data))
-     dispatch({type: 'setChecker'})
-   } else if(reply.liked[user] === 0 || reply.liked[user] === -1) {
-     reply.liked[user]++
-     let commentIndex = state.currentComments.indexOf(comment)
-     let replyIndex = comment.replies.indexOf(reply)
-     let data = JSON.parse(localStorage.getItem('data'))
-     data.comments[commentIndex].replies[replyIndex].score++
-     data.comments[commentIndex].replies[replyIndex].liked = reply.liked
-     localStorage.setItem('data', JSON.stringify(data))
-     dispatch({type: 'setChecker'})
-   }
- }
-
- const downvoteScore = (reply) => {
-   let user = state.currentUser.username
-   
-   if(!reply.liked) {
-     let liked = {}
-     liked[user] = -1
-
-
-     let commentIndex = state.currentComments.indexOf(comment)
-     let replyIndex = comment.replies.indexOf(reply)
-     let data = JSON.parse(localStorage.getItem('data'))
-     data.comments[commentIndex].replies[replyIndex].score--
-     data.comments[commentIndex].replies[replyIndex].liked = liked
-     localStorage.setItem('data', JSON.stringify(data))
-     dispatch({type: 'setChecker'})
-   } else if(reply.liked[user] === 0 || reply.liked[user] === 1) {
-     reply.liked[user]--
-
-     let commentIndex = state.currentComments.indexOf(comment)
-     let replyIndex = comment.replies.indexOf(reply)
-     let data = JSON.parse(localStorage.getItem('data'))
-     data.comments[commentIndex].replies[replyIndex].score--
-     data.comments[commentIndex].replies[replyIndex].liked = reply.liked
-     localStorage.setItem('data', JSON.stringify(data))
-     dispatch({type: 'setChecker'})
-   }
-   
- }
+const ScoreSection = ({state, dispatch, reply, localData}) => {
 
   return (
     <div className='scoreBox'>
-            <button type='button' onClick={() => upvoteScore(reply)}>
+            <button type='button' onClick={() => upvoteFunction(state, dispatch, reply, localData)}>
               <img src="../interactive-comments-section-main/images/icon-plus.svg" alt="up" />
             </button>
             <p>{reply.score}</p>
-            <button type='button' onClick={() => downvoteScore(reply)}>
+            <button type='button' onClick={() => downvoteFunction(state, dispatch, reply, localData)}>
               <img src="../interactive-comments-section-main/images/icon-minus.svg" alt="down" />
             </button>
      </div>

@@ -5,21 +5,21 @@ import ContentSection from './ContentSection'
 import DeleteEditReplyButtons from './DeleteEditReplyButtons'
 import ReplySection from '../ReplySection'
 
-const Comments = ({state, dispatch}) => {
+const Comments = ({state, dispatch, localData}) => {
 
 
   return (
     <div>
-    {state.currentComments.map((comment) => {
+    {localData.comments.map((comment) => { 
       return (
        <div key={comment.id} className='box'>
     
        <div className='commentBox'>
  
          
-           <ScoreSection comment={comment} state={state} dispatch={dispatch} />
-           <ContentSection comment={comment} state={state} dispatch={dispatch} />
-           <DeleteEditReplyButtons comment={comment} state={state} dispatch={dispatch} />
+           <ScoreSection comment={comment} state={state} dispatch={dispatch} localData={localData}/>
+           <ContentSection comment={comment} state={state} dispatch={dispatch} localData={localData}/>
+           <DeleteEditReplyButtons comment={comment} state={state} dispatch={dispatch} localData={localData}/>
          
         
         
@@ -30,6 +30,7 @@ const Comments = ({state, dispatch}) => {
           state={state}
           dispatch={dispatch}
           comment={comment}
+          localData={localData}
         />:
         ""}
 
@@ -37,7 +38,7 @@ const Comments = ({state, dispatch}) => {
         comment={comment} 
         state={state} 
         dispatch={dispatch}
-        
+        localData={localData}
         /> 
         : 
         ""}
@@ -46,6 +47,7 @@ const Comments = ({state, dispatch}) => {
        </div>
       ) 
      })}
+     
     
    </div>
   
